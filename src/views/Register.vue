@@ -131,7 +131,7 @@ export default {
         await this.$store.dispatch('register', formData)
         this.$router.push('/')
       } catch (error) {
-        console.table(error)
+        console.log(error)
       }
 
     }

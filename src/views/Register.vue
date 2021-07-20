@@ -117,7 +117,7 @@ export default {
     agree: { checked: v => v },
   },
   methods: {
-    registerHandler() {
+    async registerHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
@@ -126,9 +126,14 @@ export default {
         email: this.email,
         password: this.password,
         name: this.name
-      }   
-      console.log(formData)
-      this.$router.push('/')
+      }
+      try {
+        await this.$store.dispatch('register', formData)
+        this.$router.push('/')
+      } catch (error) {
+        console.table(error)
+      }
+
     }
   },
 };
@@ -136,3 +141,4 @@ export default {
 
 <style lang="scss" scoped>
 </style>
+

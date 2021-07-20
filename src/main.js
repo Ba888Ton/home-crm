@@ -22,6 +22,7 @@ firebase.initializeApp({
   apiKey: "AIzaSyD7gSAKUAHKw3tqNk2e1Vd8Tkyg57SNjC8",
   authDomain: "minin-crm-summer.firebaseapp.com",
   projectId: "minin-crm-summer",
+  databaseURL: "https://minin-crm-summer-default-rtdb.europe-west1.firebasedatabase.app",
   storageBucket: "minin-crm-summer.appspot.com",
   messagingSenderId: "63887981480",
   appId: "1:63887981480:web:374688bb09ef73547b3b9d",

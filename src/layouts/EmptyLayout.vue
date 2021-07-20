@@ -5,7 +5,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error(fbError) {
+      console.log(fbError);
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>

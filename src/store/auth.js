@@ -10,10 +10,6 @@ export default {
         throw error;
       }
     },
-    async logout({commit}) {
-      await firebase.auth().signOut()
-      commit('clearInfo')
-    },
     async register({dispatch, commit}, {email, password, name}) {
       try {
         await firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -26,6 +22,11 @@ export default {
         commit('setError', error)
         throw error;
       }  
+    },
+    async logout({commit}) {
+      await firebase.auth().signOut()
+      commit('clearInfo')
+      debugger
     },
     getUid() {
       const user = firebase.auth().currentUser;

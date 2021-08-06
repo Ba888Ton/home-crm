@@ -10,14 +10,20 @@
             <tr>
               <th>Валюта</th>
               <th>Курс</th>
-              <th>Дата</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>руб</td>
               <td>12121</td>
-              <td>12.12.12</td>
+            </tr>
+            <tr>
+              <td>USD</td>
+              <td>{{ currency.usd }}</td>
+            </tr>
+            <tr>
+              <td>CAD</td>
+              <td> {{ currency.cad }} </td>
             </tr>
           </tbody>
         </table>
@@ -25,3 +31,8 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: ['currency']
+}
+</script>

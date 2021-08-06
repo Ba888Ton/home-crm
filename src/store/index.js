@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
 import info from './info'
+import firebase from 'firebase'
 
 const myPlugin = store => {
   // вызывается после инициализации хранилища
@@ -25,6 +26,12 @@ export default new Vuex.Store({
     },
     clearError(state) {
       state.error = null
+    }
+  },
+  actions: {
+    async getCurrency() {
+      const currency = (await firebase.database().ref(`/currency/`).once('value')).val()
+      return currency
     }
   },
   getters: {

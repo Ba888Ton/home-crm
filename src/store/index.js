@@ -32,6 +32,9 @@ export default new Vuex.Store({
     async getCurrency() {
       const currency = (await firebase.database().ref(`/currency/`).once('value')).val()
       return currency
+    },
+    async setCurrencyValue(_, value) {
+      return firebase.database().ref(`/currency/`).update(value);
     }
   },
   getters: {

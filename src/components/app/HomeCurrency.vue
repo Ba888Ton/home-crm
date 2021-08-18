@@ -13,17 +13,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>руб</td>
-              <td>12121</td>
-            </tr>
-            <tr>
-              <td>USD</td>
-              <td>{{ currency.usd }}</td>
-            </tr>
-            <tr>
-              <td>CAD</td>
-              <td> {{ currency.cad }} </td>
+            <tr v-for="(cur, key) in currency" :key="cur">
+              <td>{{ key }}</td>
+                <EditableInput @new-currency-value="newCurrencyValue({[key]: $event})" :currency="cur"/>
             </tr>
           </tbody>
         </table>
@@ -32,7 +24,20 @@
   </div>
 </template>
 <script>
+import EditableInput from "../../views/EditableInput.vue";
 export default {
-  props: ['currency']
-}
+  components: { EditableInput },
+  props: ["currency"],
+  methods: {
+    async newCurrencyValue(newValue) {
+      await this.$store.dispatch('setCurrencyValue', newValue)
+      this.$emit('refresh')
+    }
+  },
+};
 </script>
+<style lang="scss">
+  td {
+    padding: 10px 5px;
+  }
+</style>

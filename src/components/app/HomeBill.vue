@@ -4,7 +4,7 @@
       <div class="card-content white-text">
         <span class="card-title">Счет в рублях</span>
         <p class="currency-line">
-          <span> {{ bill }} </span>
+          <span> {{ bill }} р</span>
         </p>
       </div>
     </div>

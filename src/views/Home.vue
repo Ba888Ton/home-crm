@@ -2,15 +2,14 @@
   <div>
     <div class="page-title">
       <h3>Счет</h3>
-
-      <button class="btn waves-effect waves-light btn-small">
+      <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>
     </div>
     <Loader v-if="loading" />
     <div v-else class="row">
       <HomeBill />
-      <HomeCurrency :currency="currency" />
+      <HomeCurrency :currency="currency" @refresh="refresh" />
     </div>
   </div>
 </template>
@@ -23,15 +22,21 @@ export default {
   data: () => ({
     loading: true,
     currency: null,
+    changeValue: {},
   }),
   components: {
     HomeBill,
     HomeCurrency,
     Loader,
   },
-  async mounted () {
-    this.currency = await this.$store.dispatch('getCurrency')
-    this.loading = false
-  }
+  async mounted() {
+    this.currency = await this.$store.dispatch("getCurrency");
+    this.loading = false;
+  },
+  methods: {
+    async refresh() {
+      this.currency = await this.$store.dispatch("getCurrency");
+    },
+  },
 };
 </script>

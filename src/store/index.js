@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
 import info from './info'
+import category from './category'
 import firebase from 'firebase'
 
 const myPlugin = store => {
@@ -42,6 +43,7 @@ export default new Vuex.Store({
   },
   modules: {
     auth,
-    info
+    info,
+    category
   }
 })

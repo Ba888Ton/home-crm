@@ -5,8 +5,10 @@
     </div>
     <section>
       <div class="row">
-        <CategoriesCreate />
-        <CategoriesEdit />
+        <CategoriesCreate @created="addNewCategory"/>
+        <CategoriesEdit 
+          :categories="categories"
+        />
       </div>
     </section>
   </div>
@@ -20,6 +22,20 @@ export default {
   name: 'Categories',
   components: {
     CategoriesCreate, CategoriesEdit
+  },
+  data() {
+    return {
+      categories: []
+    }
+  },
+  methods: {
+    addNewCategory(category) {
+      this.categories.push(category)
+      console.log(this.categories);
+    }
+  },
+  async mounted () {
+    this.categories = await this.$store.dispatch('fetchCategories')
   },
 };
 </script>

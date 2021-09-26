@@ -12,6 +12,16 @@ export default {
         }
 
     },
+    async editCategory({commit, dispatch}, {name, limit}) {
+        try {
+          const uid = await dispatch('getUid')
+          await firebase.database().ref(`/users/${uid}/categories`).update({name, limit})
+        } catch (error) {
+          commit('setError', error)
+          throw error
+        }
+
+    },
     async fetchCategories ({commit, dispatch}) {
       try {
         const uid = await dispatch('getUid')

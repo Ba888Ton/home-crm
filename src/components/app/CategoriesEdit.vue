@@ -18,17 +18,16 @@
           </select>
           <label>Выберите категорию</label>
         </div>
-
         <div class="input-field">
           <input 
-            id="name" 
+            id="newName" 
             type="text" 
-            v-model="name"
-            :class="{invalid: $v.name.$dirty && !$v.name.required}"
+            v-model="newName"
+            :class="{invalid: $v.newName.$dirty && !$v.newName.required}"
           />
-          <label for="name">Новое название</label>
+          <label for="newName">Новое название</label>
           <span 
-            v-if="$v.name.$dirty && !$v.name.required" 
+            v-if="!$v.newName.required" 
             class="helper-text invalid"
           >
             Введите название категории
@@ -38,7 +37,7 @@
           <input 
             id="limit" 
             type="number"
-            v-model.number="limit"
+            v-model.number="newLimit"
             :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
           />
           <label for="limit">Новый лимит</label>
@@ -62,6 +61,16 @@
 import {required, minValue} from 'vuelidate/lib/validators'
 
 export default {
+  data() {
+  return {
+      select: null,
+      name: '',
+      limit: 100,
+      current: null,
+      newName: '',
+      newLimit: ''
+    }
+  },
   props: {
     categories: {
       type: Array,
@@ -72,24 +81,17 @@ export default {
     if (this.categories.length) {
       const { id, name, limit} = this.categories[0]
       this.current = id
-      this.name = name
-      this.limit = limit
+      this.newName = name
+      this.newLimit = limit
     }
   },
   mounted () {
     window.M.updateTextFields();
     this.select = window.M.FormSelect.init(this.$refs.select)
   },
-  data() {
-    return {
-      select: null,
-      name: '',
-      limit: 100,
-      current: null
-    }
-  },
   validations: {
     name: { required },
+    newName: { required },
     limit: { minValue: minValue(10) },
   },
   watch: {
@@ -97,14 +99,26 @@ export default {
       const {name, limit} = this.categories.find(c => c.id === catId)
       this.limit = limit
       this.name = name
+    },
+    categories() {
+      console.log(this.categories);
     }
   },
   destroyed() {
     this.select && this.select.destroy()
   },
   methods: {
-    updateCatrgory () {
-      
+    async updateCategory () {
+      const newValues = {
+        name: this.newName,
+        limit: this.newLimit
+      }
+      const category = await this.$store.dispatch('editCategory', newValues)
+      console.log(category);
+      debugger
+      this.$v.$reset()
+      this.$message(`Категория "${this.newName}" была изменена`)
+      this.$emit('edited', this.newName)
     }
   }
 };

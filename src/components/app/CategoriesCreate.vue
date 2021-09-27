@@ -35,7 +35,7 @@
             Минимальная величина 
           </span>
         </div>
-        <button class="btn waves-effect waves-light" type="submit">
+        <button class="btn waves-effect waves-light blue" type="submit">
           Создать
           <i class="material-icons right">send</i>
         </button>
@@ -77,7 +77,7 @@ export default {
         this.limit = 100,
         this.$v.$reset()
         this.$message(`Категория "${category.name}" была создана`)
-        this.$emit('created', category.name)
+        this.$emit('created', category)
       } catch (e) {
         console.log(e);
       }

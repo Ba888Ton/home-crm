@@ -3,7 +3,6 @@
     <component :is="layout">
       <router-view />
     </component>
-    {{ layout }}
   </div>
 </template>
 <script>

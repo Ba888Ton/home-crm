@@ -8,7 +8,7 @@
     </div>
     <Loader v-if="loading" />
     <div v-else class="row">
-      <HomeBill />
+      <HomeBill :cur="currency" />
       <HomeCurrency :currency="currency" @refresh="refresh" />
     </div>
   </div>

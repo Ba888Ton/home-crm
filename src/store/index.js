@@ -6,22 +6,12 @@ import category from './category'
 import record from './record'
 import firebase from 'firebase'
 
-const myPlugin = store => {
-  // вызывается после инициализации хранилища
-  store.subscribe((mutation, state) => {
-    // вызывается после каждой мутации
-    // мутация передаётся в формате `{ type, payload }`.
-    console.log('[LOGGER] ' , mutation, state);
-  });
-};
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     error: null
   },
-  plugins: [myPlugin],
   mutations: {
     setError(state, error) { 
       state.error = error

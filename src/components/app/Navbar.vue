@@ -7,7 +7,9 @@
         </a>
         <span class="white-text"> {{ date | date('datetime') }} </span>
       </div>
-
+      <div class="header_bill">
+        {{bill}}
+      </div>
       <ul class="right hide-on-small-and-down">
         <li>
           <a
@@ -57,6 +59,9 @@ export default {
   computed: {
     name() {
       return this.$store.getters.info.name
+    },
+    bill() {
+      return this.$store.getters.info.bill
     }
   },
   mounted () {
@@ -72,3 +77,12 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.header_bill {
+  margin-left: auto;
+  margin-right: 20px;
+  color: #ffffff4f;
+  font-weight: 700;
+  font-size: 18px;
+}
+</style>

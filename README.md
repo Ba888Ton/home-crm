@@ -1,4 +1,7 @@
-# minin-crm
+# household-budjet
+
+Домашний бюджет. 
+Планирование, расходы, авторизация, fireBase 
 
 ## Project setup
 ```
